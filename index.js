@@ -6,11 +6,14 @@ const db = require('./config/ mongoose');
 
 const app = express();
 
-app.use(express.urlencoded());
-app.use(cookieParser());
-app.use(expressLayouts); // needs to be done before specifying the router
-app.use(express.static('./assets'));
-app.use("/", require("./routes/index"));
+// middlewares -- executed every time a request hits the server
+app.use(express.static('./assets')); // 3
+app.use(expressLayouts); // 4
+
+app.use(cookieParser()); // 2
+app.use(express.urlencoded()); // 1
+
+app.use("/", require("./routes/index")); // 5
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
