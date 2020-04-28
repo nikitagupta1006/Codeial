@@ -1,0 +1,77 @@
+Let's assume that sessions are enabled globally (for all requests).
+
+When a client makes an HTTP request, and that request doesn't contain a session cookie, a new session will be created by express-session. Creating a new session does a few things:
+
+generate a unique session id
+store that session id in a session cookie (so subsequent requests made by the client can be identified)
+create an empty session object, as req.session
+depending on the value of saveUninitialized, at the end of the request, the session object will be stored in the session store (which is generally some sort of database)
+If during the lifetime of the request the session object isn't modified then, at the end of the request and when saveUninitialized is false, the (still empty, because unmodified) session object will not be stored in the session store.
+
+The reasoning behind this is that this will prevent a lot of empty session objects being stored in the session store. Since there's nothing useful to store, the session is "forgotten" at the end of the request.
+
+When do you want to enable this? When you want to be able to identify recurring visitors, for example. You'd be able to recognize such a visitor because they send the session cookie containing the unique id.
+
+About resave: this may have to be enabled for session stores that don't support the "touch" command. What this does is tell the session store that a particular session is still active, which is necessary because some stores will delete idle (unused) sessions after some time.
+
+If a session store driver doesn't implement the touch command, then you should enable resave so that even when a session wasn't changed during a request, it is still updated in the store (thereby marking it active).
+
+So it entirely depends on the session store that you're using if you need to enable this option or not.
+
+-----------------------------------------------------------------------------------------------------------
+
+Based on my knowledge of using Passport.js for a project, I will try to answer as much as I can.
+
+First of all, there is nothing (function) like alert() in nodejs, so you would have to rename your alert(...) which is a browser thing, to something like console.log(...)
+
+I cannot see your app.js file so, I will go ahead and try to answer your queries based on my experience of using passportjs.
+
+Assuming that you have following in your app.js (order is important, see here)
+
+var passport = require('passport');
+// express-session configs here
+// following is invoked on each request.
+app.use(passport.initialize());
+passport.initialize() and passport.session() are invoked on each request and they are the ones that cause serializeUser to load the user id to req.user if a serialized user is found in the server (when using mongodb, if the user exist in mongodb).
+
+passport.session() calls deserializeUser on each request, which queries the mongodb using the user._id that was initially loaded to req.user by serializeUser and stores the more information about user in the req.user.
+
+process.nextTick() defers the execution of the callback until the next pass around the event loop. Database querying is sync in nature and process.nextTick() make it asynchronous. There is lots of tutorials about this, Google it.
+
+-----------------------------------------------------------------------------------------------------------
+I have never used Express.js, although according to their documentation on the subject it sounds like:
+
+Cookies are stored on the client, with a key (which the server will use to retrieve the session data) and a hash (which the server will use to make sure the cookie data hasn't been tampered with, so if you try and change a value the cookie will be invalid)
+
+The session data, as opposed to some frameworks (e.g. Play Framework!) is held on the server, so the cookie is more like a placeholder for the session than a holder of actual session data.
+
+From here, it looks like this session data on the server is by default held in memory, although that could be altered to whatever storage form implements the appropriate API.
+
+
+-----------------------------------------------------------------------------------------------------------
+
+Nested population in mongoose
+
+const CourseSchema = new Schema({
+    classes: [{ type: Schema.Types.ObjectId, ref: 'Classroom' }]
+});
+
+const ClassSchema = new Schema({
+    location: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
+    instructors: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+});
+
+Course
+    .findById(req.params.courseId)
+    .populate({
+        path: 'classes',
+        model: 'Classroom',
+        populate: [{
+            path: 'instructors',
+            model: 'User'
+        },
+        {
+            path: 'location',
+            model: 'Location'
+        }]
+    })

@@ -4,15 +4,19 @@
     <title>
         <%= title %>
     </title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="/css/layout.css" type="text/css">
     <%- style %>
 </head>
 
 <body>
     <%- include('./_header.ejs'); %>
-        <%- body %>
-            <%- include('./_footer.ejs'); %>
-                <%- script %>
+        <main>
+            <%- body %>
+        </main>
+        <%- include('./_footer.ejs'); %>
+            <%- script %>
+                <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
 </body>
 
 </html>

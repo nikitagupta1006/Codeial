@@ -1,0 +1,121 @@
+#home-page {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  vertical-align: top;
+  justify-content: center;
+}
+
+#home-page > * {
+  margin: 1.2rem 0.4rem;
+  border: 1.5px solid gray;
+}
+
+#home-page timeline {
+  width: 60%;
+}
+
+#home-page timeline .divider {
+  width: 95%;
+  border: 2px solid gray;
+  margin: 1rem auto;
+}
+
+#home-page aside {
+  width: 20%;
+}
+
+#feed-posts {
+  height: auto;
+  padding: 0.2rem;
+}
+
+#new-post-form textarea {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  resize: none;
+}
+
+#posts-section {
+  width: 90%;
+  margin: 2rem auto;
+  border: 1px solid gray;
+  padding: 1rem;
+}
+
+#posts-section ul {
+  padding-inline-start: 0rem;
+  list-style: none;
+}
+
+#posts-section li {
+  border: 1px solid gray;
+  margin: 0.5rem auto;
+  padding: 0.5rem 0.8rem;
+}
+
+#posts-section li .content {
+  font-weight: bold;
+}
+
+#posts-section li .created-at,
+#posts-section li .updated-at {
+  text-align: right;
+}
+
+#posts-section li div {
+  padding: 0.2rem 0;
+  margin: 0.2rem 0;
+}
+
+#posts-section .post-content-container,
+#posts-section .post-metadata,
+#posts-section .comment-content-container {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#posts-section .post-content-container .fa-times,
+#posts-section .post-content-container .fa-trash,
+#posts-section .post-metadata .fa-times,
+#posts-section .post-metadata .fa-trash,
+#posts-section .comment-content-container .fa-times,
+#posts-section .comment-content-container .fa-trash {
+  color: black;
+}
+
+#posts-section .new-comment-form {
+  border-top: 1px solid gray;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+
+#posts-section .new-comment-form > * {
+  margin: 0.2rem 1rem;
+}
+
+#posts-section .new-comment-form textarea {
+  resize: none;
+  border-radius: 25px;
+  padding-left: 1rem;
+  padding-top: 0.4rem;
+  letter-spacing: 0.1rem;
+}
+
+#posts-section .new-comment-form input[type="submit"] {
+  border-radius: 25px;
+  padding: 0.4rem;
+  border-style: none;
+  letter-spacing: 0.1rem;
+  font-size: 0.9rem;
+  font-family: monospace;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}

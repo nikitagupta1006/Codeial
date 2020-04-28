@@ -1,0 +1,46 @@
+<li>
+    <div>
+        <div class="post-content-container">
+            <div class="content">
+                <%= post['content'] %>
+            </div>
+            <% if(locals.user && (locals.user.id == post.user.id)) { %>
+                <div>
+                    <a href="/posts/destroy/<%= post.id %>">
+                        <span class="fa fa-trash"></span>
+                    </a>
+                </div>
+                <% } %>
+        </div>
+        <div class="post-metadata">
+            <div class="author">
+                <%= post['user']['name'] %>
+            </div>
+            <div>
+                <div class="created-at">
+                    Created At:
+                    <%= post['createdAt'] %>
+                </div>
+                <div class="updated-at">
+                    Last Updated At:
+                    <%= post['updatedAt'] %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comments-container">
+        <!-- add new comment form -->
+        <% if (locals.user) { %>
+            <%- include('./_form_comment.ejs', {post: post}) -%>
+                <% } %>
+
+                    <div class="display-comments-container">
+                        <ul>
+                            <% for(let comment of post.comments) { %>
+                                <%- include('./_comment.ejs', {comment: comment, post: post}) -%>
+                                    <%  } %>
+                        </ul>
+                    </div>
+
+    </div>
+</li>

@@ -1,0 +1,22 @@
+<div id="heading">
+    <%= profile_user['name']%>'s Profile
+</div>
+<div class="center">
+    <h3>
+        <%= locals.profile_user.name %>
+    </h3>
+    <h3>
+        <%= locals.profile_user.email %>
+    </h3>
+</div>
+
+<!-- add edit profile functionality if the profile corresponds to the logged in user -->
+
+<% if(locals.user.id == profile_user.id) { %>
+    <form action="/users/edit-profile/<%= profile_user.id %>" method="POST" class="edit-profile-form-container">
+        <input type="text" name="name" id="name" placeholder="<%= profile_user['name'] %>" required />
+        <input type="email" name="email" id="email" placeholder="<%= profile_user['email']%>" required />
+        <input type="hidden" name="id" value="<%= profile_user.id %>" />
+        <input type="submit" value="Edit Profile" />
+    </form>
+    <% } %>

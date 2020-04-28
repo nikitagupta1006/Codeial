@@ -1,0 +1,105 @@
+#home-page {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    vertical-align: top;
+    justify-content: center;
+    >* {
+        margin: 1.2rem 0.4rem;
+        // padding:
+        border: 1.5px solid gray;
+    }
+    timeline {
+        width: 60%;
+        .divider {
+            width: 95%;
+            border: 2px solid gray;
+            margin: 1rem auto;
+        }
+    }
+    aside {
+        width: 20%;
+    }
+}
+
+#feed-posts {
+    height: auto;
+    padding: 0.2rem;
+}
+
+#new-post-form {
+    textarea {
+        border: 1px solid black;
+        background-color: white;
+        color: black;
+        resize: none;
+    }
+}
+
+#posts-section {
+    width: 90%;
+    margin: 2rem auto;
+    border: 1px solid gray;
+    padding: 1rem;
+    ul {
+        padding-inline-start: 0rem;
+        list-style: none;
+    }
+    li {
+        border: 1px solid gray;
+        margin: 0.5rem auto;
+        padding: 0.5rem 0.8rem;
+        .content {
+            font-weight: bold;
+        }
+        .created-at,
+        .updated-at {
+            text-align: right;
+        }
+        div {
+            padding: 0.2rem 0;
+            margin: 0.2rem 0;
+        }
+    }
+    .post-content-container,
+    .post-metadata,
+    .comment-content-container {
+        display: flex;
+        flex-wrap: nowrap;
+        flex-direction: row;
+        justify-content: space-between;
+        .fa-times,
+        .fa-trash {
+            color: black;
+        }
+    }
+    .new-comment-form {
+        border-top: 1px solid gray;
+        padding-top: 0.5rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+        >* {
+            margin: 0.2rem 1rem;
+        }
+        textarea {
+            resize: none;
+            border-radius: 25px;
+            padding-left: 1rem;
+            padding-top: 0.4rem;
+            letter-spacing: 0.1rem;
+        }
+        input[type="submit"] {
+            border-radius: 25px;
+            padding: 0.4rem;
+            border-style: none;
+            letter-spacing: 0.1rem;
+            font-size: 0.9rem;
+            font-family: monospace;
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    }
+}

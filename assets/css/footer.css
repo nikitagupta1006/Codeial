@@ -1,4 +1,40 @@
 footer {
-    color: yellow;
-    background-color: rebeccapurple;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background-color: #333333;
+  color: white;
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-top: 0.3rem;
+}
+
+#org-container {
+  padding: 0.7rem 1rem;
+  margin: 0.2rem 0.4rem;
+}
+
+#website-links {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding-inline-start: 0rem;
+  padding: 0.7rem 1rem;
+  margin: 0.2rem 0.4rem;
+  justify-content: flex-start;
+}
+
+#website-links li {
+  list-style: none;
+  display: inline-block;
+  margin-bottom: 0.6rem;
+}
+
+#website-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+#website-links li a:hover {
+  text-decoration: underline;
 }

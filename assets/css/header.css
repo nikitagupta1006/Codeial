@@ -1,4 +1,45 @@
 header {
-    background-color: black;
-    color: white;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: #333333;
+  color: white;
+  font-family: monospace;
+}
+
+#app-heading {
+  font-weight: bolder;
+  width: auto;
+  letter-spacing: 0.1rem;
+  font-size: 1.8rem;
+  padding: 0.7rem 1rem;
+  margin: 0.2rem 0.2rem;
+}
+
+#nav-items {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  padding-inline-start: 0rem;
+  padding: 0.7rem 1rem;
+  margin: 0.2rem 0.2rem;
+}
+
+#nav-items li {
+  display: inline-block;
+  padding: 0.4rem 0.1rem 0.2rem;
+  margin: 0.2rem 0.4rem;
+  font-size: 0.9rem;
+}
+
+#nav-items li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#nav-items li a:hover {
+  text-decoration: underline;
 }

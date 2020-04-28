@@ -1,3 +1,39 @@
-<div>
-    <%= title %>
+<link rel="stylesheet" href="/css/home.css" type="text/css" />
+<div id="home-page">
+    <aside id="groups">
+    </aside>
+    <timeline>
+        <% if(locals.user) { %>
+            <div id="heading" class="center">New Post ?</div>
+
+            <section id="feed-posts">
+                <!--  create a new post form -->
+                <%- include('./_form_post.ejs') -%>
+
+            </section>
+
+            <section class="divider">
+            </section>
+
+            <% } %>
+
+                <section id="posts-section">
+                    <ul>
+                        <% for(let post of locals.posts) { %>
+                            <%- include('./_post.ejs', {post: post}) -%>
+                                <%}%>
+                    </ul>
+                </section>
+    </timeline>
+
+    <aside id="user-friends">
+        <% for(let user of locals.all_users) { %>
+            <div>
+                <a href="/users/profile/<%= user._id %>">
+                    <%= user['name'] %>
+                </a>
+            </div>
+            <% } %>
+    </aside>
+
 </div>

@@ -1,0 +1,12 @@
+<li>
+    <div class="comment-content-container">
+        <%= comment.content %>
+            <% if(locals.user && ((locals.user.id == post.id) || (locals.user.id == comment.user.id))) { %>
+                <a href="/comments/destroy/<%= comment._id %>">
+                    <span class="fa fa-times"></span>
+                </a>
+                <% } %>
+
+    </div>
+    <span><%= comment.user.name %></span>
+</li>

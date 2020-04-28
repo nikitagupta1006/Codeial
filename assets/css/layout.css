@@ -1,6 +1,72 @@
 body {
-    margin: 0px;
-    background-color: grey;
-    color: yellow;
-    text-align: center;
+  font-family: monospace;
+}
+
+main {
+  background-image: linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%);
+  color: black;
+  height: auto;
+  min-height: 200vh;
+  margin-top: 0.3rem;
+  border: 1px solid grey;
+}
+
+#heading {
+  font-weight: bold;
+  font-size: 1.4rem;
+  letter-spacing: 0.3rem;
+  padding: 1rem 0rem;
+  text-align: center;
+}
+
+.edit-profile-form-container,
+.post-form-container {
+  margin-block-end: 0rem;
+  margin: 1rem auto;
+  width: 50vw;
+  text-align: center;
+  padding: 0.5rem 0rem;
+}
+
+.edit-profile-form-container,
+.post-form-container > * {
+  margin: 0rem auto;
+}
+
+.edit-profile-form-container textarea,
+.edit-profile-form-container input[type="text"],
+.edit-profile-form-container input[type="email"],
+.edit-profile-form-container input[type="password"],
+.post-form-container textarea,
+.post-form-container input[type="text"],
+.post-form-container input[type="email"],
+.post-form-container input[type="password"] {
+  border-style: none;
+  border-bottom: 2px solid black;
+  display: block;
+  width: auto;
+  padding: 0.8rem;
+  margin: 1rem auto;
+  background-color: inherit;
+  text-align: center;
+  font-family: monospace;
+  letter-spacing: 0.1rem;
+  font-size: 0.9rem;
+}
+
+.edit-profile-form-container input[type="submit"],
+.post-form-container input[type="submit"] {
+  border-radius: 25px;
+  padding: 0.8rem;
+  margin: 1rem auto;
+  letter-spacing: 0.1rem;
+  font-size: 0.9rem;
+  font-family: monospace;
+  background-color: black;
+  color: white;
+  font-weight: bold;
+}
+
+.center {
+  text-align: center;
 }

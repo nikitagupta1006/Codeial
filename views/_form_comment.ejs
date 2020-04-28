@@ -1,0 +1,5 @@
+<form method="POST" class="new-comment-form" action="/comments/create">
+    <textarea rows="2" cols="30" placeholder="Write a comment..." name="content"></textarea>
+    <input type="hidden" name="post" value="<%= post._id %>">
+    <input type="submit" class="post-comment-button" />
+</form>
