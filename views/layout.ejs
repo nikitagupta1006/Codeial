@@ -5,18 +5,64 @@
         <%= title %>
     </title>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" type="text/css">
     <link rel="stylesheet" href="/css/layout.css" type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" type="text/javascript"></script>
+
     <%- style %>
 </head>
 
 <body>
     <%- include('./_header.ejs'); %>
+        <!-- <% if (flash.success && flash.success.length > 0) { %>
+            <h2>
+                <%= flash.success %>
+            </h2>
+            <% } %> -->
         <main>
             <%- body %>
         </main>
         <%- include('./_footer.ejs'); %>
+            <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
             <%- script %>
-                <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+
+                <script>
+                    let flashSuccess = "<%= flash.success %>";
+                    let flashError = "<%= flash.error %>"
+                    let flashInfo = "<%= flash.info %>"
+
+                    if (flashSuccess && flashSuccess.length > 0) {
+                        new Noty({
+                            theme: 'mint',
+                            timeout: 1500,
+                            type: 'success',
+                            layout: 'topRight',
+                            text: `${flashSuccess}`
+                        }).show();
+                    }
+
+                    if (flashInfo && flashInfo.length > 0) {
+                        new Noty({
+                            theme: 'mint',
+                            timeout: 1500,
+                            type: 'info',
+                            layout: 'topRight',
+                            text: `${flashInfo}`
+                        }).show();
+                    }
+
+                    if (flashError && flashError.length > 0) {
+                        new Noty({
+                            theme: 'mint',
+                            timeout: 1500,
+                            type: 'error',
+                            layout: 'topRight',
+                            text: `${flashError}`
+                        }).show();
+                    }
+                </script>
+
+
 </body>
 
 </html>

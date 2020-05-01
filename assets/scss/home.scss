@@ -33,6 +33,7 @@
         background-color: white;
         color: black;
         resize: none;
+        width: 45vw;
     }
 }
 
@@ -70,6 +71,7 @@
         justify-content: space-between;
         .fa-times,
         .fa-trash {
+            cursor: pointer;
             color: black;
         }
     }

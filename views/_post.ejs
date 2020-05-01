@@ -1,4 +1,4 @@
-<li>
+<li id="post-<%= post.id %>">
     <div>
         <div class="post-content-container">
             <div class="content">
@@ -6,9 +6,10 @@
             </div>
             <% if(locals.user && (locals.user.id == post.user.id)) { %>
                 <div>
-                    <a href="/posts/destroy/<%= post.id %>">
+                    <!-- <a href="/posts/destroy/<%= post.id %>" class="delete-post-button">
                         <span class="fa fa-trash"></span>
-                    </a>
+                    </a> -->
+                    <span class="fa fa-trash delete-post-button" data-post-id="<%= post.id %>"></span>
                 </div>
                 <% } %>
         </div>

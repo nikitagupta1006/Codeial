@@ -8,8 +8,16 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
+const flash = require("connect-flash");
+const customMware = require('./config/middleware');
 
 const app = express();
+
+app.use(function(req, res, next) {
+    app.locals.appName = "CODEIAL";
+    res.locals.appName = "codeial"
+    next();
+})
 
 app.use(
     sassMiddleware({
@@ -50,11 +58,17 @@ app.use(
 app.use(passport.initialize()); // run serializeUser()
 app.use(passport.session()); // runs deserializeUser() on every request
 
+// #region 
 /**
  * cookie value received along with the request is then searched through the database(mongodb) to populate the req.user object
  **/
+// #endregion
 
 app.use(passport.setAuthenticatedUser);
+
+// set after the passport.session() has been called
+app.use(flash());
+app.use(customMware.setFlash);
 
 app.use("/", require("./routes/index"));
 
@@ -69,6 +83,4 @@ app.listen(port, function(err) {
 });
 
 
-// name of mongoose model
-// locals.user and user diff
-// sass flow
+// invoke the listener on post and comment deletion without calling the helper function

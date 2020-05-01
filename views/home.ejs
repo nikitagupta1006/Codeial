@@ -7,9 +7,7 @@
             <div id="heading" class="center">New Post ?</div>
 
             <section id="feed-posts">
-                <!--  create a new post form -->
                 <%- include('./_form_post.ejs') -%>
-
             </section>
 
             <section class="divider">
@@ -18,7 +16,7 @@
             <% } %>
 
                 <section id="posts-section">
-                    <ul>
+                    <ul id="posts-list-container">
                         <% for(let post of locals.posts) { %>
                             <%- include('./_post.ejs', {post: post}) -%>
                                 <%}%>
@@ -37,3 +35,6 @@
     </aside>
 
 </div>
+
+<script src="/js/posts.js" type="text/javascript"></script>
+<script src="/js/comments.js" type="text/javascript"></script>

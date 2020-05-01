@@ -35,6 +35,7 @@
   background-color: white;
   color: black;
   resize: none;
+  width: 45vw;
 }
 
 #posts-section {
@@ -84,6 +85,7 @@
 #posts-section .post-metadata .fa-trash,
 #posts-section .comment-content-container .fa-times,
 #posts-section .comment-content-container .fa-trash {
+  cursor: pointer;
   color: black;
 }
 
