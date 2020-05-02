@@ -1,5 +1,6 @@
 const User = require("../models/user");
-
+const path = require('path');
+const fs = require('fs');
 // using promises 
 // mongoose queries are thenables not promises
 // they return promises with exec
@@ -81,22 +82,54 @@ module.exports.destroySession = function(req, res) {
     return res.redirect("/posts");
 };
 
-module.exports.edit = function(req, res) {
-    if (req.params.id == req.user.id) {
-        let isUserFound = User.findByIdAndUpdate(
-            req.params.id, {
-                name: req.body.name,
-                email: req.body.email
-            }).exec();
+module.exports.edit = async function(req, res) {
 
-        isUserFound.then((user) => {
-            console.log(user);
-            return res.redirect("back");
-        }).catch((err) => {
-            console.log(`Error ${err}`);
-            return;
-        });
-    } else
+    if (req.params.id == req.user.id) {
+        try {
+            let user = await User.findById(req.user.id);
+            User.uploadedAvatar(req, res, function(err) {
+                if (err) {
+                    console.log("MULTER ERROR: ", err);
+                }
+                // being handled after the file has been stored in the directory
+                console.log(req.file);
+                user.name = req.body.name;
+                user.email = req.body.email;
+                if (req.file) {
+                    if (user.avatar) {
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+                    // not compulsory to upload files
+                    user.avatar = path.join(User.avatarPath, req.file.filename);
+                }
+                user.save();
+                return res.redirect('back');
+
+            });
+        } catch (err) {
+            console.log(err);
+            req.flash('error', err);
+            return res.redirect('back');
+        }
+    } else {
         return res.status(401).send('Unauthorized');
+    }
 
 }
+
+// if (req.params.id == req.user.id) {
+//     let isUserFound = User.findByIdAndUpdate(
+//         req.params.id, {
+//             name: req.body.name,
+//             email: req.body.email
+//         }).exec();
+
+//     isUserFound.then((user) => {
+//         console.log(user);
+//         return res.redirect("back");
+//     }).catch((err) => {
+//         console.log(`Error ${err}`);
+//         return;
+//     });
+// } else
+//     return res.status(401).send('Unauthorized');

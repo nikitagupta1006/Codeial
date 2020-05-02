@@ -2,10 +2,11 @@ const express = require("express");
 const expressLayouts = require("express-ejs-layouts");
 const cookieParser = require("cookie-parser");
 const port = 8000;
-const db = require("./config/ mongoose").db;
+const db = require("./config/mongoose").db;
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
+const passportJWT = require('../config/passport-jwt-strategy');
 const MongoStore = require("connect-mongo")(session);
 const sassMiddleware = require("node-sass-middleware");
 const flash = require("connect-flash");
@@ -31,6 +32,8 @@ app.use(
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(expressLayouts);
+// make the uploads path available to the browser
+app.use('/uploads', express.static('./uploads'));
 app.use(express.static("./assets"));
 
 app.use(
@@ -84,3 +87,4 @@ app.listen(port, function(err) {
 
 
 // invoke the listener on post and comment deletion without calling the helper function
+// preview of image selected

@@ -63,8 +63,29 @@ main {
         color: white;
         font-weight: bold;
     }
+    input[type="file"] {
+        border: 1.5px dashed black;
+        display: block;
+        width: auto;
+        padding: 0.8rem;
+        margin: 2rem auto;
+        background-color: inherit;
+        text-align: center;
+        font-family: monospace;
+        letter-spacing: 0.1rem;
+        font-size: 0.9rem;
+    }
 }
 
 .center {
     text-align: center;
+}
+
+#profile-picture {
+    display: inline-block;
+    margin: 2rem auto;
+    border: 1px solid grey;
+    border-radius: 50%;
+    height: 8rem;
+    width: 8rem;
 }
