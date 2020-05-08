@@ -36,14 +36,20 @@ module.exports.destroy = async function(req, res) {
         if (!post)
             throw new Error('Post not found in the database');
 
-        post.remove();
-        Comment.deleteMany({
-            post: req.params.id
-        });
+        if (post.user == req.user.id) {
+            post.remove();
+            Comment.deleteMany({
+                post: req.params.id
+            });
 
-        return res.json(200, {
-            message: "Post and associated comments have been deleted"
-        });
+            return res.json(200, {
+                message: "Post and associated comments have been deleted"
+            });
+        } else {
+            return res.json(401, {
+                message: "You are not authorized to delete the post"
+            });
+        }
 
     } catch (err) {
         console.log(err);

@@ -36,6 +36,10 @@ function createPostDOM(post) {
             </ul>
         </div>
     </div>
+    <div class="post-social-container">
+    <button class="fa fa-heart post-like-button"></button>
+    <span class="num-likes">0</span>
+</div>
 </li>`;
 
     $('#posts-list-container').prepend(newPost);

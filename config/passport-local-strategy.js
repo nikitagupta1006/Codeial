@@ -35,6 +35,7 @@ passport.serializeUser(function(user, done) {
 
 // deserialize the user from the key in the cookies
 passport.deserializeUser(function(id, done) {
+
     User.findById(id, function(err, user) {
         if (err) {
             console.log("Error fetching user from database");
@@ -60,13 +61,5 @@ passport.setAuthenticatedUser = function(req, res, next) {
     }
     return next();
 }
-
-// passport.isNotLoggedIn = function(req, res, next) {
-//     console.log("is not logged in called");
-//     if (!req.isAuthenticated()) {
-//         return next();
-//     }
-//     return res.redirect('/');
-// }
 
 module.exports = passport;

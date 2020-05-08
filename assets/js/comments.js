@@ -14,13 +14,11 @@ function createComment(comment) {
 
 
 // creation of new comments via delegation
-$('#posts-list-container').on('click', '.new-comment-form', function(event) {
-    console.log(this, "in listener");
+$('#posts-list-container').on('click', '.post-comment-button', function(event) {
     event.preventDefault();
-    console.log("used ajax /comments/create");
     $.ajax('/comments/create', {
             method: "POST",
-            data: $(this).serialize()
+            data: $(this).parent().eq(0).serialize()
         })
         .done((data) => {
             createComment(data.data.comment);

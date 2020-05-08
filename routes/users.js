@@ -27,4 +27,16 @@ router.post(
 
 router.get("/sign-out", userController.destroySession);
 
+router.get('/auth/google', passport.authenticate('google', {
+    scope: ['profile', 'email']
+}));
+
+// url at which we'll receive the data
+router.get('/auth/google/callback', function(req, res, next) {
+    console.log("yet to be authenticated!");
+    next();
+}, passport.authenticate('google', {
+    failureRedirect: '/users/sign-in'
+}), userController.createSession);
+
 module.exports = router;

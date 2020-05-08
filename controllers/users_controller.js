@@ -78,6 +78,7 @@ module.exports.createSession = function(req, res) {
 module.exports.destroySession = function(req, res) {
     // destroy the session
     req.logout();
+    console.log("session: ", req.session);
     req.flash('success', 'Signed out successfully');
     return res.redirect("/posts");
 };
@@ -104,7 +105,6 @@ module.exports.edit = async function(req, res) {
                 }
                 user.save();
                 return res.redirect('back');
-
             });
         } catch (err) {
             console.log(err);
@@ -116,20 +116,3 @@ module.exports.edit = async function(req, res) {
     }
 
 }
-
-// if (req.params.id == req.user.id) {
-//     let isUserFound = User.findByIdAndUpdate(
-//         req.params.id, {
-//             name: req.body.name,
-//             email: req.body.email
-//         }).exec();
-
-//     isUserFound.then((user) => {
-//         console.log(user);
-//         return res.redirect("back");
-//     }).catch((err) => {
-//         console.log(`Error ${err}`);
-//         return;
-//     });
-// } else
-//     return res.status(401).send('Unauthorized');

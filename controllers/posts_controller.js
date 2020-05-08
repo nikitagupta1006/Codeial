@@ -1,21 +1,36 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
 const User = require('../models/user');
+const Like = require('../models/like');
+const queue = require('../config/kue');
+
+const postEmaiWorker = require('../workers/post_email_worker');
+
 
 module.exports.create = async function(req, res) {
-    console.log(req.body);
     try {
         let newPost = await Post.create({
             content: req.body.content,
             user: req.user._id
         });
+        await Post.populate(newPost, {
+            path: 'user'
+        });
         console.log(newPost);
+        // add a send email to the user job to the queue
+        let job = await queue.create('posts', {
+            post: newPost
+        });
+
+        job.save(function(err) {
+            if (err) {
+                console.log(`Error in saving post email job to redis database ${err}`);
+            }
+            console.log("post email job enqueued: ", job.id);
+        })
+
+
         if (req.xhr) {
-            await Post.populate(newPost, {
-                path: 'user'
-            });
-            console.log("server side");
-            console.log(newPost);
             return res.status(200).send({
                 data: {
                     post: newPost,
@@ -68,10 +83,21 @@ module.exports.destroy = async function(req, res) {
             throw new Error('Post not found in the database');
 
         if (post.user == req.user.id) {
-            post.remove();
             Comment.deleteMany({
                 post: req.params.id
             });
+            // delete all the likes associated
+            await Like.deleteMany({
+                onModel: 'Post',
+                likeable: req.params.id
+            });
+            await Like.deleteMany({
+                _id: {
+                    $in: post.comments
+                }
+            });
+            post.remove();
+
             if (req.xhr) {
                 return res.status(200).send({
                     data: {

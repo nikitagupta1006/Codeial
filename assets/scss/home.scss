@@ -61,6 +61,18 @@
             padding: 0.2rem 0;
             margin: 0.2rem 0;
         }
+        .post-social-container {
+            padding-top: 0.7rem;
+            border-top: 1px solid gray;
+            .fa-heart {
+                border: none;
+                background-color: inherit;
+                color: gray;
+            }
+            .red {
+                color: red;
+            }
+        }
     }
     .post-content-container,
     .post-metadata,
